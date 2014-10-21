@@ -17,8 +17,22 @@ extern void eraseBlock(unsigned char row, unsigned char col);
 #define		LEFT_BUTTON		(P2IN & BIT2)
 #define		RIGHT_BUTTON	(P2IN & BIT1)
 
+#define SCREEN_WIDTH 11
+#define SCREEN_HEIGHT 7
+
 //define colors for the block
 typedef enum	{BLACK, WHITE} color;
+
+typedef struct {
+    int x;
+    int y;
+} vector2d_t;
+
+typedef struct {
+    vector2d_t position;
+    vector2d_t velocity;
+    unsigned char radius;
+} ball_t;
 
 void paint();
 void bounce();
