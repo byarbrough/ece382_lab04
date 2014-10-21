@@ -43,7 +43,7 @@ void paint(){
 			if (button_press) {
 				button_press = FALSE;
 				if (blockColor == BLACK){
-				drawBlock(y,x);
+					drawBlock(y,x);
 				}
 				else {
 					eraseBlock(y,x);
@@ -53,30 +53,35 @@ void paint(){
 }
 
 void bounce(){
-	unsigned char	x, y, xVel, yVel;
+	signed char	x, y;
+	signed char xVel, yVel;
 	x=4;		y=4;
-	xVel = 4;	yVel=4;
+	xVel = 2;	yVel=-2;
 	drawBlock(x, y);
 
 	while(1){
-		//horizontal
-		if(x < 11 && x > 0){
-			x += xVel;
-		}
-		else {//bounce
+		//horizontal bounce
+		if(x >= 11 || x <= 0){
 			xVel *= -1;
 		}
-		//vertical
-		if ( y < 7 && y > 0 ){
-			y += yVel;
-		}
-		else {
+		//vertical bounce
+		if ( y >= 7 || y <= 0 ){
 			yVel *= -1;
 		}
+
+		//update position
+		x += xVel;
+		y += yVel;
+
+		//draw
 		clearDisplay();
-		drawBlock(x, y);
+		drawBlock(y, x);
 
 		//delay
+		unsigned long x = 0;
+		while (x < 802016){
+			x++;
+		}
 	}
 
 }
