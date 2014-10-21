@@ -30,6 +30,7 @@ STE2007_DISPLAYON:				.equ	0xAF
 	.global initNokia
 	.global clearDisplay
 	.global drawBlock
+	.global eraseBlock
 
 
 ;-------------------------------------------------------------------------------
@@ -368,3 +369,40 @@ loopdB:
 	pop		R5
 
 	ret							; return whence you came
+
+	;-------------------------------------------------------------------------------
+;	Name:		eraseBlock
+;	Inputs:		R12 row to draw block
+;				R13	column to draw block
+;	Outputs:	none
+;	Purpose:	draw an 8x8 block of white pixels at screeen cordinates	8*row,8*col
+;				The display screen, for the purposes of this routine, is divided
+;				into 8x8 blocks.  Consequently the codinate system, for the purposes
+;				of this routine, start in the upper left of the screen @ (0,0) and
+;				end @ (11,7) in the lower right of the display.
+;	Registers:	R5	column counter to draw all 8 pixel columns
+;-------------------------------------------------------------------------------
+eraseBlock:
+	push	R5
+	push	R12
+	push	R13
+
+	rla.w	R13					; the column address needs multiplied
+	rla.w	R13					; by 8in order to convert it into a
+	rla.w	R13					; pixel address.
+	call	#setAddress			; move cursor to upper left corner of block
+
+	mov		#1, R12
+	mov		#0x00, R13
+	mov.w	#0x08, R5			; loop all 8 pixel columns
+loopdEraseB:
+	call	#writeNokiaByte		; draw the pixels
+	dec.w	R5
+	jnz		loopdEraseB
+
+	pop		R13
+	pop		R12
+	pop		R5
+
+	ret							; return whence you came
+

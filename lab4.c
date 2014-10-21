@@ -4,6 +4,7 @@ extern void init();
 extern void initNokia();
 extern void clearDisplay();
 extern void drawBlock(unsigned char row, unsigned char col);
+extern void eraseBlock(unsigned char row, unsigned char col);
 
 #define		TRUE			1
 #define		FALSE			0
@@ -13,10 +14,15 @@ extern void drawBlock(unsigned char row, unsigned char col);
 #define		LEFT_BUTTON		(P2IN & BIT2)
 #define		RIGHT_BUTTON	(P2IN & BIT1)
 
+//define colors for the block
+typedef enum	{BLACK, WHITE} color;
+
 
 void main() {
 
 	unsigned char	x, y, button_press;
+
+	color blockColor = BLACK;
 
 	// === Initialize system ================================================
 	IFG1=0; /* clear interrupt flag1 */
@@ -49,11 +55,27 @@ void main() {
 				if (x<=10) x=x+1;
 				button_press = TRUE;
 			}
+			//check for aux button push
+			else if (AUX_BUTTON == 0) {
+				while (AUX_BUTTON == 0);
+				if (blockColor == BLACK){
+					blockColor = WHITE;
+				}
+				else {
+					blockColor = BLACK;
+				}
+				button_press = TRUE;
+			}
 
+			//actually draws the block
 			if (button_press) {
 				button_press = FALSE;
-				clearDisplay();
+				if (blockColor == BLACK){
 				drawBlock(y,x);
-			}
+				}
+				else {
+					eraseBlock(y,x);
+				}
 		}
-}
+	}
+}//end of main
