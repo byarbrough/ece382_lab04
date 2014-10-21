@@ -51,3 +51,13 @@ _Disassembly_
 | Register holding y            | 14           |
 | Register holding z            | 15           |
 | Register holding return value | 12           |
+
+####Questions
+
+_What is the role of the extern directive in a .c file?_
+
+The _extern_ keyword defines a variable once outside a function - this sets aside storage for it - so it has a larger scope. It then must be delcared within each fucntion that accesses it.
+
+_What is the role of the .global directive in an .asm file (used in lines 28-32)?_
+
+The .global notation tells the assembler to leave a reference to this term, which the linker then uses to match the label with the C program.
