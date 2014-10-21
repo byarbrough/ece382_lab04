@@ -56,7 +56,7 @@ _Disassembly_
 
 _What is the role of the extern directive in a .c file?_
 
-The _extern_ keyword defines a variable once outside a function - this sets aside storage for it - so it has a larger scope. It then must be delcared within each fucntion that accesses it.
+The _extern_ keyword defines a variable once outside a function. In the context of this lab, it tells the compiler that the function is external to this program. It is then later linked to the .asm file.
 
 _What is the role of the .global directive in an .asm file (used in lines 28-32)?_
 
