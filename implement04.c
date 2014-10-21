@@ -52,3 +52,9 @@ void paint(){
 	}
 }
 
+void bounce(){
+}
+
+void pong(){
+}
+

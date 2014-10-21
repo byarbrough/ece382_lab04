@@ -13,5 +13,7 @@ void main() {
 	clearDisplay();
 
 	paint();
+	pong();
+	bounce();
 
 }//end of main

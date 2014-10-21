@@ -21,5 +21,7 @@ extern void eraseBlock(unsigned char row, unsigned char col);
 typedef enum	{BLACK, WHITE} color;
 
 void paint();
+void bounce();
+void pong();
 
 #endif
