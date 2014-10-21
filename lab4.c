@@ -12,8 +12,20 @@ void main() {
 	initNokia();
 	clearDisplay();
 
-	paint();
-	pong();
-	bounce();
+	while(1) {
+		//up for required funct
+		if (UP_BUTTON == 0) {
+			while(UP_BUTTON == 0);
+			paint();
+		//down for a funct
+		} else if (DOWN_BUTTON == 0) {
+			while(DOWN_BUTTON == 0);
+			pong();
+		//left for b funct
+		} else if (LEFT_BUTTON == 0) {
+			while(LEFT_BUTTON == 0);
+			bounce();
+		}
+	}//end while
 
 }//end of main

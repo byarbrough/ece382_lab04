@@ -53,6 +53,32 @@ void paint(){
 }
 
 void bounce(){
+	unsigned char	x, y, xVel, yVel;
+	x=4;		y=4;
+	xVel = 4;	yVel=4;
+	drawBlock(x, y);
+
+	while(1){
+		//horizontal
+		if(x < 11 && x > 0){
+			x += xVel;
+		}
+		else {//bounce
+			xVel *= -1;
+		}
+		//vertical
+		if ( y < 7 && y > 0 ){
+			y += yVel;
+		}
+		else {
+			yVel *= -1;
+		}
+		clearDisplay();
+		drawBlock(x, y);
+
+		//delay
+	}
+
 }
 
 void pong(){
