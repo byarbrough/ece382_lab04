@@ -1,5 +1,25 @@
 #include "lab04.h"
 
+ball_t createBall(int xPos, int yPos, int xHead, int yHead, unsigned char speed, unsigned char radius){
+
+	ball_t newBall;
+	newBall.position = initVector(xPos, yPos);
+	newBall.heading = initVector(xHead, yHead);
+	newBall.radius = radius;
+	newBall.speed = speed;
+
+	return newBall;
+}
+
+vector2d_t initVector(int x, int y)
+{
+    vector2d_t newVector;
+    newVector.x = x;
+    newVector.y = y;
+
+    return newVector;
+}
+
 void paint(){
 	unsigned char	x, y, button_press;
 	x=4;		y=4;
@@ -52,26 +72,54 @@ void paint(){
 	}
 }
 
+/**
+ * This method is resposible for moving and bouncing the ball
+ */
+ball_t bounce(ball_t moveB){
+
+	//check for bouncing
+	if (moveB.position.x <= 0 || moveB.position.x >= SCREEN_WIDTH){
+		moveB.heading.x *= -1;
+	}
+	if (moveB.position.y <= 0 || moveB.position.y >= SCREEN_HEIGHT){
+			moveB.heading.y *= -1;
+	}
+
+	//move the ball
+	moveB.position.x += moveB.heading.x;
+	moveB.position.y += moveB.heading.y;
+
+	//delay
+	unsigned long x = 0;
+	while (x < (82016/moveB.speed)){
+		x++;
+	}
+
+	return moveB;
+}
+
+/*
 void bounce(){
+	unsigned char speed = 1;
 	signed char	x, y;
-	signed char xVel, yVel;
+	signed char xHead, yHead;
 	x=4;		y=4;
-	xVel = 2;	yVel=-2;
+	xHead = 1;	yHead= 1;
 	drawBlock(x, y);
 
 	while(1){
 		//horizontal bounce
 		if(x >= 11 || x <= 0){
-			xVel *= -1;
+			xHead *= -1;
 		}
 		//vertical bounce
 		if ( y >= 7 || y <= 0 ){
-			yVel *= -1;
+			yHead *= -1;
 		}
 
 		//update position
-		x += xVel;
-		y += yVel;
+		x += xHead;
+		y += yHead;
 
 		//draw
 		clearDisplay();
@@ -79,12 +127,13 @@ void bounce(){
 
 		//delay
 		unsigned long x = 0;
-		while (x < 802016){
+		while (x < (802016/speed)){
 			x++;
 		}
 	}
 
 }
+*/
 
 void pong(){
 }

@@ -21,7 +21,7 @@ extern void eraseBlock(unsigned char row, unsigned char col);
 #define SCREEN_HEIGHT 7
 
 //define colors for the block
-typedef enum	{BLACK, WHITE} color;
+typedef enum {BLACK, WHITE} color;
 
 typedef struct {
     int x;
@@ -29,13 +29,20 @@ typedef struct {
 } vector2d_t;
 
 typedef struct {
+	unsigned char speed;
     vector2d_t position;
-    vector2d_t velocity;
+    vector2d_t heading;
     unsigned char radius;
 } ball_t;
 
+ball_t createBall(int xPos, int yPos, int xHead, int yHead, unsigned char speed, unsigned char radius);
+
+ball_t moveBall(ball_t ballToMove);
+
+vector2d_t initVector(int x, int y);
+
 void paint();
-void bounce();
+ball_t bounce(ball_t moveB);
 void pong();
 
 #endif

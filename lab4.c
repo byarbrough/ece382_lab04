@@ -23,8 +23,14 @@ void main() {
 			pong();
 		//left for b funct
 		} else if (LEFT_BUTTON == 0) {
+			ball_t theBall = createBall(4, 4, 1, -1, 3, 8); //create a new ball
 			while(LEFT_BUTTON == 0);
-			bounce();
+			//bounce the ball forever
+			while(1){
+				drawBlock(theBall.position.y, theBall.position.x);
+				theBall = bounce(theBall);
+				clearDisplay();
+			}
 		}
 	}//end while
 
