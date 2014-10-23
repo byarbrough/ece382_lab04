@@ -5,8 +5,8 @@
 
 extern void init();
 extern void initNokia();
-extern void clearDisplay();
-extern void drawBlock(unsigned char row, unsigned char col);
+extern void clearDisplay(unsigned );
+extern void drawBlock(unsigned char row, unsigned char col, unsigned char color);
 extern void eraseBlock(unsigned char row, unsigned char col);
 
 #define		TRUE			1

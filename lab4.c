@@ -10,7 +10,7 @@ void main() {
 	WDTCTL=WDTPW+WDTHOLD; /* stop WD */
 	init();
 	initNokia();
-	clearDisplay();
+	clearDisplay(0x00);
 
 	while(1) {
 		//up for required funct
@@ -30,9 +30,9 @@ void main() {
 			while(LEFT_BUTTON == 0);
 			//bounce the ball forever
 			while(1){
-				drawBlock(theBall.position.y, theBall.position.x);
+				drawBlock(theBall.position.y, theBall.position.x, 0xFF);
 				theBall = bounce(theBall);
-				clearDisplay();
+				clearDisplay(0x00);
 				if (UP_BUTTON == 0){
 					theBall.speed++;
 				}

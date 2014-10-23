@@ -194,12 +194,13 @@ clearDisplay:
 	push	R12
 	push	R13
 
+	mov.w	R12, R13			;put shade in data byte
 	mov.w	#0x00, R12			; set display address to 0,0
-	mov.w	#0x00, R13
+	;mov.w	#0x00, R13
 	call	#setAddress
 
 	mov.w	#0x01, R12			; write a "clear" set of pixels
-	mov.w	#0x00, R13			; to every byt on the display
+	;mov.w	#0x00, R13			; to every byt on the display
 
 	mov.w	#0x360, R11			; loop counter
 clearLoop:
@@ -208,7 +209,7 @@ clearLoop:
 	jnz		clearLoop
 
 	mov.w	#0x00, R12			; set display address to 0,0
-	mov.w	#0x00, R13
+	;mov.w	#0x00, R13
 	call	#setAddress
 
 	pop		R13
@@ -338,6 +339,7 @@ nextDD:
 ;	Name:		drawBlock
 ;	Inputs:		R12 row to draw block
 ;				R13	column to draw block
+;				R14 color of block
 ;	Outputs:	none
 ;	Purpose:	draw an 8x8 block of black pixels at screeen cordinates	8*row,8*col
 ;				The display screen, for the purposes of this routine, is divided
@@ -350,6 +352,7 @@ drawBlock:
 	push	R5
 	push	R12
 	push	R13
+	push	R14
 
 	rla.w	R13					; the column address needs multiplied
 	rla.w	R13					; by 8in order to convert it into a
@@ -357,52 +360,16 @@ drawBlock:
 	call	#setAddress			; move cursor to upper left corner of block
 
 	mov		#1, R12
-	mov		#0xFF, R13
+	mov		r14, R13
 	mov.w	#0x08, R5			; loop all 8 pixel columns
 loopdB:
 	call	#writeNokiaByte		; draw the pixels
 	dec.w	R5
 	jnz		loopdB
 
+	pop		R14
 	pop		R13
 	pop		R12
 	pop		R5
 
 	ret							; return whence you came
-
-	;-------------------------------------------------------------------------------
-;	Name:		eraseBlock
-;	Inputs:		R12 row to draw block
-;				R13	column to draw block
-;	Outputs:	none
-;	Purpose:	draw an 8x8 block of white pixels at screeen cordinates	8*row,8*col
-;				The display screen, for the purposes of this routine, is divided
-;				into 8x8 blocks.  Consequently the codinate system, for the purposes
-;				of this routine, start in the upper left of the screen @ (0,0) and
-;				end @ (11,7) in the lower right of the display.
-;	Registers:	R5	column counter to draw all 8 pixel columns
-;-------------------------------------------------------------------------------
-eraseBlock:
-	push	R5
-	push	R12
-	push	R13
-
-	rla.w	R13					; the column address needs multiplied
-	rla.w	R13					; by 8in order to convert it into a
-	rla.w	R13					; pixel address.
-	call	#setAddress			; move cursor to upper left corner of block
-
-	mov		#1, R12
-	mov		#0x00, R13
-	mov.w	#0x08, R5			; loop all 8 pixel columns
-loopdEraseB:
-	call	#writeNokiaByte		; draw the pixels
-	dec.w	R5
-	jnz		loopdEraseB
-
-	pop		R13
-	pop		R12
-	pop		R5
-
-	ret							; return whence you came
-

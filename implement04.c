@@ -31,7 +31,7 @@ vector2d_t initVector(int x, int y)
 void paint(){
 	unsigned char	x, y, button_press;
 	x=4;		y=4;
-	drawBlock(x, y);
+	drawBlock(x, y, 0xFF);
 	button_press = FALSE;
 
 	color blockColor = BLACK;
@@ -60,9 +60,12 @@ void paint(){
 				while (AUX_BUTTON == 0);
 				if (blockColor == BLACK){
 					blockColor = WHITE;
+					clearDisplay(0xFF);
 				}
 				else {
 					blockColor = BLACK;
+					//flip the color of the screen
+					clearDisplay(0x00);
 				}
 				button_press = TRUE;
 			}
@@ -71,10 +74,10 @@ void paint(){
 			if (button_press) {
 				button_press = FALSE;
 				if (blockColor == BLACK){
-					drawBlock(y,x);
+					drawBlock(y,x, 0xFF);
 				}
 				else {
-					eraseBlock(y,x);
+					drawBlock(y,x, 0x00);
 				}
 		}
 	}
@@ -134,9 +137,10 @@ void pong(ball_t pBall){
 		}//end of checking for paddle
 
 		//update display
-		clearDisplay();
-		drawBlock(pBall.position.y, pBall.position.x);
-		drawBlock(paddle.height, SCREEN_WIDTH);
+		clearDisplay(0x00);
+		drawBlock(paddle.height, SCREEN_WIDTH, 0xAA);
+		drawBlock(pBall.position.y, pBall.position.x, 0xFF);
+
 
 	}//end of playing
 
