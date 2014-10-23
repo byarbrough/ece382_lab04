@@ -111,6 +111,7 @@ ball_t bounce(ball_t moveB){
 
 void pong(ball_t pBall){
 	unsigned char playing = TRUE;
+	color blockColor = BLACK;
 	//create the paddle
 	paddle_t paddle = createPaddle(4);
 
@@ -136,11 +137,28 @@ void pong(ball_t pBall){
 			}
 		}//end of checking for paddle
 
-		//update display
-		clearDisplay(0x00);
-		drawBlock(paddle.height, SCREEN_WIDTH, 0xAA);
-		drawBlock(pBall.position.y, pBall.position.x, 0xFF);
+		//check for the AUX button
+		if (AUX_BUTTON == 0) {
+			while (AUX_BUTTON == 0);
+			//flip block color
+			if (blockColor == BLACK){
+				blockColor = WHITE;
+			}
+			else {
+				blockColor = BLACK;
+			}
 
+		//update display
+			if (blockColor == BLACK){
+				clearDisplay(0x00);
+				drawBlock(paddle.height, SCREEN_WIDTH, 0xAA);
+				drawBlock(pBall.position.y, pBall.position.x, 0xFF);
+			}
+			else {
+				clearDisplay(0x00);
+				drawBlock(paddle.height, SCREEN_WIDTH, 0x55);
+				drawBlock(pBall.position.y, pBall.position.x, 0x00);
+			}
 
 	}//end of playing
 
