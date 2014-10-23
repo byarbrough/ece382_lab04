@@ -118,16 +118,16 @@ void pong(ball_t pBall){
 
 		//check for movement of the paddle
 		if (UP_BUTTON == 0) {
+			//while(UP_BUTTON == 0);
 			paddle.height--;
 		} else if (DOWN_BUTTON == 0) {
-			while(DOWN_BUTTON == 0);
+			//while(DOWN_BUTTON == 0);
 			paddle.height++;
 		}
 
 		//check for paddle contact
 		if (pBall.position.x == SCREEN_WIDTH){
-			if (pBall.position.y > paddle.height + 1 ||
-					pBall.position.y < paddle.height - 1){
+			if (pBall.position.y != paddle.height){
 				//end the game
 				playing = FALSE;
 			}
@@ -139,6 +139,9 @@ void pong(ball_t pBall){
 		drawBlock(paddle.height, SCREEN_WIDTH);
 
 	}//end of playing
+
+	//game over
+	while(1);
 
 }//end of pong
 
