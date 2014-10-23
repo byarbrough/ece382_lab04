@@ -32,14 +32,19 @@ typedef struct {
 	unsigned char speed;
     vector2d_t position;
     vector2d_t heading;
-    unsigned char radius;
 } ball_t;
 
-ball_t createBall(int xPos, int yPos, int xHead, int yHead, unsigned char speed, unsigned char radius);
+typedef struct {
+	signed char height;
+}paddle_t;
+
+ball_t createBall(int xPos, int yPos, int xHead, int yHead, unsigned char speed);
 
 ball_t moveBall(ball_t ballToMove);
 
 vector2d_t initVector(int x, int y);
+
+paddle_t createPaddle(signed char pos);
 
 void paint();
 ball_t bounce(ball_t moveB);

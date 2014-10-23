@@ -20,10 +20,11 @@ void main() {
 		//down for a funct
 		} else if (DOWN_BUTTON == 0) {
 			while(DOWN_BUTTON == 0);
-			pong();
+			ball_t theBall = createBall(4, 4, 1, -1, 3); //create a new ball
+			pong(theBall);
 		//left for b funct
 		} else if (LEFT_BUTTON == 0) {
-			ball_t theBall = createBall(4, 4, 1, -1, 3, 8); //create a new ball
+			ball_t theBall = createBall(4, 4, 1, -1, 3); //create a new ball
 			while(LEFT_BUTTON == 0);
 			//bounce the ball forever
 			while(1){

@@ -1,15 +1,23 @@
 #include "lab04.h"
 
-ball_t createBall(int xPos, int yPos, int xHead, int yHead, unsigned char speed, unsigned char radius){
+ball_t createBall(int xPos, int yPos, int xHead, int yHead, unsigned char speed){
 
 	ball_t newBall;
 	newBall.position = initVector(xPos, yPos);
 	newBall.heading = initVector(xHead, yHead);
-	newBall.radius = radius;
 	newBall.speed = speed;
 
 	return newBall;
 }
+
+//creates a new paddle
+paddle_t createPaddle(signed char pos){
+	paddle_t newPad;
+	newPad.height = pos;
+	return newPad;
+}
+
+
 
 vector2d_t initVector(int x, int y)
 {
@@ -98,43 +106,39 @@ ball_t bounce(ball_t moveB){
 	return moveB;
 }
 
-/*
-void bounce(){
-	unsigned char speed = 1;
-	signed char	x, y;
-	signed char xHead, yHead;
-	x=4;		y=4;
-	xHead = 1;	yHead= 1;
-	drawBlock(x, y);
+void pong(ball_t pBall){
+	unsigned char playing = TRUE;
+	//create the paddle
+	paddle_t paddle = createPaddle(4);
 
-	while(1){
-		//horizontal bounce
-		if(x >= 11 || x <= 0){
-			xHead *= -1;
+	while(playing){
+
+		//move the ball
+		pBall = bounce(pBall);
+
+		//check for movement of the paddle
+		if (UP_BUTTON == 0) {
+			paddle.height--;
+		} else if (DOWN_BUTTON == 0) {
+			while(DOWN_BUTTON == 0);
+			paddle.height++;
 		}
-		//vertical bounce
-		if ( y >= 7 || y <= 0 ){
-			yHead *= -1;
-		}
 
-		//update position
-		x += xHead;
-		y += yHead;
+		//check for paddle contact
+		if (pBall.position.x == SCREEN_WIDTH){
+			if (pBall.position.y > paddle.height + 1 ||
+					pBall.position.y < paddle.height - 1){
+				//end the game
+				playing = FALSE;
+			}
+		}//end of checking for paddle
 
-		//draw
+		//update display
 		clearDisplay();
-		drawBlock(y, x);
+		drawBlock(pBall.position.y, pBall.position.x);
+		drawBlock(paddle.height, SCREEN_WIDTH);
 
-		//delay
-		unsigned long x = 0;
-		while (x < (802016/speed)){
-			x++;
-		}
-	}
+	}//end of playing
 
-}
-*/
-
-void pong(){
-}
+}//end of pong
 
