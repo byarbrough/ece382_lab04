@@ -1,5 +1,6 @@
 ;-------------------------------------------------------------------------------
 ;	Name:		Dr. Chris Coulston
+;	Edited by	Brian Yarbrough
 ;	Term:		Fall 2014
 ;	MCU:		MSP430G2553
 ;	Lecture:	22
