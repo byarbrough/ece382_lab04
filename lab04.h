@@ -1,3 +1,14 @@
+/* lab04.h
+* Author: 	C2C Brian Yarbrough
+* Device:	MSP430
+* Class:	Ece 382, Section T5
+* Date:		20 Oct 14
+* Description:	Header file for program whcih loads three games onto the MSP430. Pressing Up gives "Paint" Left is "Bounce"
+*		Down is "Pong". Each game has controls. Bonus functionality implemented
+* Documentation:	No help outside of the course material was recived for code.
+*
+*/
+
 #include <msp430.h>
 
 #ifndef _LAB04_H
