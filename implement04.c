@@ -1,3 +1,7 @@
+/* implement04.c
+* Author: Brian Yarbrough
+* 	Contains the function descriptions. See header file for complete description
+*/
 #include "lab04.h"
 
 ball_t createBall(int xPos, int yPos, int xHead, int yHead, unsigned char speed){
