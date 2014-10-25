@@ -1,3 +1,8 @@
+/* lab4.c
+* Author: Brian Yarbrough
+* 	Main file for lab4. Selects which play mode and then calls appropriate functions.
+*	See header file for complete description.
+*/
 #include <msp430g2553.h>
 #include "lab04.h"
 
