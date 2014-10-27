@@ -2,8 +2,10 @@
 * Author: Brian Yarbrough
 * 	Contains the function descriptions. See header file for complete description
 */
+
 #include "lab04.h"
 
+//creates a new ball
 ball_t createBall(int xPos, int yPos, int xHead, int yHead, unsigned char speed){
 
 	ball_t newBall;
@@ -22,7 +24,7 @@ paddle_t createPaddle(signed char pos){
 }
 
 
-
+//initialize a new vector
 vector2d_t initVector(int x, int y)
 {
     vector2d_t newVector;
@@ -32,6 +34,7 @@ vector2d_t initVector(int x, int y)
     return newVector;
 }
 
+//the method for required functionality
 void paint(){
 	unsigned char	x, y, button_press;
 	x=4;		y=4;
@@ -87,9 +90,7 @@ void paint(){
 	}
 }
 
-/**
- * This method is resposible for moving and bouncing the ball
- */
+//responsible for bouncing the ball
 ball_t bounce(ball_t moveB){
 
 	//check for bouncing
@@ -113,6 +114,7 @@ ball_t bounce(ball_t moveB){
 	return moveB;
 }
 
+//A functionality
 void pong(ball_t pBall){
 	unsigned char playing = TRUE;
 	color blockColor = BLACK;
