@@ -80,3 +80,12 @@ Although the program itself actually exists in four files, I made many of the fu
 
 Really this creates a lot of work for the compiler and linker, but they typically did a good job as all of the extern and .global labels matched. This creates a rather complicated structure, but this flowchar shows a very simplified version of what was going on.
 
+![alt text](https://dl.dropboxusercontent.com/u/67954924/flowDiagram.jpg "Basic Flow Chart")
+
+####Structure
+
+It is also worth noting that I made use of severl structs and typedefs to construct the ball's characteristics. 
+
+###Testing
+
+Testing the code was realatively straightforward since everything could be tested visually. To test the required functionality I first tried to color the entire screen and then erase it. Meanwhile (for the frist few times) I could use a breakpoint at the start of paint() to verify that the x and y coordinates 
